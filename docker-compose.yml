@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    container_name: db-schedule-web
+    volumes:
+      - data:/var/lib/postgresql/db-schedule-web
+    networks:
+      - schedule-web-net
+    environment:
+      POSTGRES_DB: schedule
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+
+volumes:
+  data:
+    external: false
+networks:
+  schedule-web-net:
+    driver: bridge
